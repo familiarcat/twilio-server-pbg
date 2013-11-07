@@ -54,7 +54,9 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  database: twilio_server_production
+  database: da1vqtdj5580ug
+  host: ec2-54-225-255-208.compute-1.amazonaws.com
   pool: 5
-  username: twilio_server
-  password: l3tm31n!
+  username: umcrosmgrnmpjo
+  port: 5432
+  password: aLQsK0dwl7NBGuirGvB203CK6e
