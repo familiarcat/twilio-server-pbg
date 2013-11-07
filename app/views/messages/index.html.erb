@@ -1,0 +1,37 @@
+<h1>Listing messages</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>To</th>
+      <th>From</th>
+      <th>Text</th>
+      <th>Audio url</th>
+      <th>Image url</th>
+      <th>Media url</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @messages.each do |message| %>
+      <tr>
+        <td><%= message.to %></td>
+        <td><%= message.from %></td>
+        <td><%= message.text %></td>
+        <td><%= message.audio_url %></td>
+        <td><%= message.image_url %></td>
+        <td><%= message.media_url %></td>
+        <td><%= link_to 'Show', message %></td>
+        <td><%= link_to 'Edit', edit_message_path(message) %></td>
+        <td><%= link_to 'Destroy', message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Message', new_message_path %>
