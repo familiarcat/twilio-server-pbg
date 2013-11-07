@@ -57,4 +57,4 @@ production:
   database: twilio_server_production
   pool: 5
   username: twilio_server
-  password:
+  password: l3tm31n!
