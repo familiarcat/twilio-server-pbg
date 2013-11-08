@@ -9,10 +9,9 @@ class TextsController < ApplicationController
      end
      twiml.text
      
-     respond_to do |format|
-       format.html {render :text =>"#{twiml.text}"}
-       format.xml {render :text=>"#{twiml.text}"}
-     end
+     # respond_to do |format|
+     #        format.html {render :text =>"#{twiml.text}"}
+     #      end 
   end
 
 end
