@@ -1,0 +1,26 @@
+development:
+  account_sid:      "AC2ecaa287170250bddb4420429e5e6d2c"
+  auth_token:       "d27a06fb4b5183566989e4fe39bdb352"
+  base_url:         "https://api.twilio.com/2010-04-01"
+  ivr_phone_number: "+1 314-720-2048"
+  
+
+test:
+  account_sid:      "AC2ecaa287170250bddb4420429e5e6d2c"
+  auth_token:       "d27a06fb4b5183566989e4fe39bdb352"
+  base_url:         "https://api.twilio.com/2010-04-01"
+  ivr_phone_number: "+1 314-720-2048" 
+  
+
+staging:
+  account_sid:      "AC2ecaa287170250bddb4420429e5e6d2c"
+  auth_token:       "d27a06fb4b5183566989e4fe39bdb352"
+  base_url:         "https://api.twilio.com/2010-04-01"
+  ivr_phone_number: "+1 314-720-2048"
+  sandbox_pin:      "'PIN' from https://www.twilio.com/user/account/"
+
+production:
+  account_sid:      "AC2ecaa287170250bddb4420429e5e6d2c"
+  auth_token:       "d27a06fb4b5183566989e4fe39bdb352"
+  base_url:         "https://api.twilio.com/2010-04-01"
+  ivr_phone_number: "+1 314-720-2048"
