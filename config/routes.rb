@@ -5,6 +5,8 @@ TwilioServer::Application.routes.draw do
   
   resources :texts, path: '/texts'
   resources :calls, path: '/calls'
+  
+  post 'calls/messages', :to => 'calls#messages'
     
 
   # The priority is based upon order of creation: first created -> highest priority.
