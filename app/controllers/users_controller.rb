@@ -5,6 +5,10 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     @users = User.all
+   respond_to do |format|
+      format.html
+      format.json { render :json => @users.to_json(:include => :messages) } 
+   end
   end
 
   # GET /users/1
@@ -29,6 +33,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }
+        update_message_user_names()
         format.json { render action: 'show', status: :created, location: @user }
       else
         format.html { render action: 'new' }
@@ -43,6 +48,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        update_message_user_names()
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

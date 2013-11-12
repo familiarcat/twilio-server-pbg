@@ -30,5 +30,20 @@
   <%= @message.media_url %>
 </p>
 
+<p>
+  <strong>User name:</strong>
+  <%= @message.user_name %>
+</p>
+
+<p>
+  <strong>User id:</strong>
+  <%= @message.user_id %>
+</p>
+
+<p>
+  <strong>Read:</strong>
+  <%= @message.read %>
+</p>
+
 <%= link_to 'Edit', edit_message_path(@message) %> |
 <%= link_to 'Back', messages_path %>

@@ -7,6 +7,9 @@ group :production do
   gem 'rails_12factor'
 end
 
+gem 'rack-cors', :require => 'rack/cors' 
+
+
 gem 'twilio-ruby'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

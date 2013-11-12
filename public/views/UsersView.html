@@ -1,0 +1,32 @@
+<div class="header">
+	 <h1>Telephony</h1>
+</div>
+<div controller="UsersViewController">
+	<div ng-repeat="user in users" class="col-md-12" id="userItemRenderer">
+		<div class="col-md-4">
+			<div class="userItem">
+				<div ng-click="selectUserToEdit($event, user)" click-to-edit="user.name"></div>
+				<p>
+					Phone: {{user.phone}}
+				</p>
+				<p>
+					Messages: {{user.messages.length}}
+				</p><select ng-model="currentMessage.id">
+					<option ng-repeat="message in user.messages" value="{{message.id}}">
+						{{message.user_name || message.from}}
+					</option>
+				</select>
+			</div>
+		</div>
+		<div class="col-md-8">
+			<div ng-repeat="message in user.messages | filter:{id: currentMessage.id} | limitTo:1" class="message">
+				<h5>
+					From: {{message.user_name || message.from}}
+				</h5><label><input type="checkbox" ng-model="message.read" ng-click="updateSelection($event, message)"> Read</label>
+				<p>
+					{{message.text}}
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
