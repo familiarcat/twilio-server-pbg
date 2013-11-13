@@ -12,7 +12,8 @@
 				</h7>
 				<h7>
 					Messages: {{user.messages.length}}
-				</h7><br><select ng-model="currentMessage.id">
+				</h7><br>
+				<select ng-init="$scope.selectedMessageIndex = 0" ng-model="$scope.selectedMessageIndex">
 					<option ng-repeat="message in user.messages" value="{{message.id}}">
 						{{message.user_name || message.from}}
 					</option>
@@ -20,7 +21,7 @@
 			</div>
 		</div>
 		<div class="col-md-8 messageBody">
-			<div ng-repeat="message in user.messages | filter:{id: currentMessage.id} | limitTo:1" class="message">
+			<div ng-repeat="message in user.messages | filter:{id: $scope.selectedMessageIndex} | limitTo:1" class="message">
 				<h7>
 					From: {{message.user_name || message.from}}
 				</h7><br><label><input type="checkbox" ng-model="message.read" ng-click="updateSelection($event, message)"> Mark as Read</label><br><br>
