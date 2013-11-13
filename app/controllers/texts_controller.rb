@@ -16,7 +16,7 @@ class TextsController < ApplicationController
      @message.save
      @user.save
      twiml = Twilio::TwiML::Response.new do |r|
-         r.Message "I got it! Your note has been heard loud and clear. Call (314) 720-2048 to hear all of your notes."
+         r.Message "I got it! Your note has been heard loud and clear. Your promotional code for this message is #{@message.id}. Call (314) 720-2048 to hear your notes."
        end
      respond_to do |format|
         format.html do 

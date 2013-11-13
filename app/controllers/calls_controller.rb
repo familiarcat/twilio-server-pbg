@@ -18,27 +18,46 @@ class CallsController < ApplicationController
   end
   
   def messages
-     @from_number = params[:From] 
-     @user = User.where(phone: @from_number).take 
-     message_number = 1;
-     @twiml = Twilio::TwiML::Response.new do |r|
-       @user.messages.each do |m|
-          r.Say "Message number: #{message_number}"
-          r.Say "#{m.text}"
-          r.Pause
-          r.Pause
-          message_number+=1
+     @from_number = params[:From]
+     @digits = params[:Digits]
+     if @digits == "1" 
+       @user = User.where(phone: @from_number).take 
+        message_number = 1;
+        @twiml = Twilio::TwiML::Response.new do |r|
+          @user.messages.each do |m|
+             r.Say "Message number: #{message_number}"
+             r.Say "#{m.text}"
+             r.Pause
+             r.Pause
+             message_number+=1
+          end
+          r.Say "Thanks for calling. Goodbye?"
+        end
+     else
+       @message = Message.where(id: @digits).take
+       if @message != nil
+         @twiml = Twilio::TwiML::Response.new do |r| 
+           r.Say "#{@message.text}"
+           r.Pause
+           r.Pause
+           r.Say "Thanks for calling. Goodbye?"
+         end 
+       else
+         @twiml = Twilio::TwiML::Response.new do |r| 
+            r.Say "We've had a problem finding your message. Please check the promo code and call us back."
+            r.Pause
+            r.Say "Thanks for calling. Goodbye?"
+          end
        end
-       r.Say "Thanks for calling. Goodbye?"
      end
-     
      respond_to do |format|
-       format.html do 
-          puts "#{@twiml.text}"
-          render :xml => "#{@twiml.text}", :layout=>false;
-       end
+        format.html do 
+           puts "#{@twiml.text}"
+           render :xml => "#{@twiml.text}", :layout=>false;
+        end
      end
   end
+  
     
   def create
     @from_number = params[:From]
@@ -51,10 +70,10 @@ class CallsController < ApplicationController
      @user.save
      new_messages = @user.messages.length > 0;
      twiml = Twilio::TwiML::Response.new do |r|
-       gather = r.Gather(:action=>"calls/messages", :numDigits=>"1", :timeout=>"30") do |g|
+       gather = r.Gather(:action=>"calls/messages", :numDigits=>"5", :timeout=>"30", :finishOnKey=>"#") do |g|
          r.Say "Thanks for checking in."
          r.Say  "You have #{@user.messages.length} messages."
-         if new_messages then r.Say "Press 1 to listen to them." end
+         if new_messages then r.Say "Press 1 and the pound sign to listen to them. If your message contains a promotional code, enter that number, followed by the pound sign to hear just that message." end
        end
      end
      
@@ -64,5 +83,5 @@ class CallsController < ApplicationController
            render :xml => "#{twiml.text}", :layout=>false;
          end
       end   
-  end
+    end
 end
