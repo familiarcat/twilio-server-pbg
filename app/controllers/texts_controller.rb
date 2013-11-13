@@ -18,6 +18,7 @@ class TextsController < ApplicationController
      twiml = Twilio::TwiML::Response.new do |r|
          r.Message "I got it! Your note has been heard loud and clear. Your promotional code for this message is #{@message.id}. Call (314) 720-2048 to hear your notes."
        end
+     update_message_user_names()
      respond_to do |format|
         format.html do 
           render :xml => "#{twiml.text}"
